@@ -1,0 +1,31 @@
+{
+  "name": "o2_playwright_demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "ui": "playwright test --ui",
+    "test:chrome": "playwright test --project=chromium",
+    "ui:cs": "cross-env TEST_LANGUAGE=cs playwright test --ui",
+    "ui:en": "cross-env TEST_LANGUAGE=en playwright test --ui"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tredgate/o2_playwright_demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tredgate/o2_playwright_demo/issues"
+  },
+  "homepage": "https://github.com/tredgate/o2_playwright_demo#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.9.2"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3"
+  }
+}
