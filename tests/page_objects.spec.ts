@@ -8,6 +8,7 @@ test("PageObjects Exercise - Login and Logout", async ({ page }) => {
 
   await loginPage.openPmtool();
   await loginPage.login("pw_skoleni", "TEG2023");
+  await dashboardPage.waitUntilLoaded();
   await dashboardPage.clickProfile();
   await dashboardPage.clickLogout();
 });

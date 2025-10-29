@@ -4,11 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test",
-    "ui": "playwright test --ui",
-    "test:chrome": "playwright test --project=chromium",
-    "ui:cs": "cross-env TEST_LANGUAGE=cs playwright test --ui",
-    "ui:en": "cross-env TEST_LANGUAGE=en playwright test --ui"
+    "prod:en:test": "cross-env TEST_ENV=PROD TEST_LANGUAGE=en playwright test",
+    "prod:en:ui": "cross-env TEST_ENV=PROD TEST_LANGUAGE=en playwright test --ui",
+    "prod:cs:test": "cross-env TEST_ENV=PROD TEST_LANGUAGE=cs playwright test",
+    "prod:cs:ui": "cross-env TEST_ENV=PROD TEST_LANGUAGE=cs playwright test --ui",
+    "test:en:test": "cross-env TEST_ENV=TEST TEST_LANGUAGE=en playwright test",
+    "test:en:ui": "cross-env TEST_ENV=TEST TEST_LANGUAGE=en playwright test --ui",
+    "test:cs:test": "cross-env TEST_ENV=TEST TEST_LANGUAGE=cs playwright test",
+    "test:cs:ui": "cross-env TEST_ENV=TEST TEST_LANGUAGE=cs playwright test --ui"
   },
   "repository": {
     "type": "git",
@@ -23,9 +26,11 @@
   "homepage": "https://github.com/tredgate/o2_playwright_demo#readme",
   "devDependencies": {
     "@playwright/test": "^1.56.1",
-    "@types/node": "^24.9.2"
+    "@types/node": "^24.9.2",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
+    "cross-env": "^10.1.0",
     "dotenv": "^17.2.3"
   }
 }

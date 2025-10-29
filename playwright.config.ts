@@ -1,51 +1,80 @@
 import { defineConfig, devices } from "@playwright/test";
+import { getCurrentEnvironmentConfig } from "./src/config/environment-config";
 
 /**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
-
-/**
+ * Playwright Configuration with Environment Management
+ *
+ * This configuration automatically adjusts based on environment variables:
+ * - TEST_ENV: Specifies the target environment (PROD, TEST)
+ * - TEST_LANGUAGE: Specifies the language for localization (en, cs)
+ *
+ * Usage examples:
+ * - cross-env TEST_ENV=PROD TEST_LANGUAGE=en playwright test
+ * - cross-env TEST_ENV=TEST TEST_LANGUAGE=cs playwright test --ui
+ *
+ * The configuration combines:
+ * - Base Playwright settings
+ * - Environment-specific overrides
+ * - Test data and URLs for the target environment
+ *
  * See https://playwright.dev/docs/test-configuration.
  */
+
+// Get environment-specific configuration
+const environmentConfig = getCurrentEnvironmentConfig();
+
 export default defineConfig({
-  testDir: "./tests",
-  /* Run tests in files in parallel */
-  fullyParallel: true,
+  // Use environment-specific test directory (can be overridden per environment)
+  testDir: environmentConfig.testDir || "./tests",
+
+  // Use environment-specific parallel execution setting
+  fullyParallel: environmentConfig.fullyParallel ?? true,
+
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: "html",
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  use: {
-    /* Base URL to use in actions like `await page.goto('')`. */
-    // baseURL: 'http://localhost:3000',
 
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+  /* Use environment-specific retry configuration */
+  retries: environmentConfig.retries ?? (process.env.CI ? 2 : 0),
+
+  /* Use environment-specific worker configuration */
+  workers: environmentConfig.workers ?? (process.env.CI ? 1 : undefined),
+
+  /* Use environment-specific timeout */
+  timeout: environmentConfig.timeout || 30000,
+
+  /* Use environment-specific reporter configuration */
+  reporter: environmentConfig.reporter || "html",
+
+  /* Merge base settings with environment-specific use configuration */
+  use: {
+    /* Environment-specific timeouts */
+    actionTimeout: environmentConfig.testData.timeouts.medium,
+    navigationTimeout: environmentConfig.testData.timeouts.long,
+
+    /* Collect trace when retrying the failed test */
     trace: "retain-on-failure",
+
+    /* Screenshot on failure for debugging */
+    screenshot: "only-on-failure",
+
+    /* Merge any additional environment-specific use configuration */
+    ...environmentConfig.use,
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
-      name: "chromium",
+      name: `chromium`,
       use: { ...devices["Desktop Chrome"] },
     },
 
     {
-      name: "firefox",
+      name: `firefox`,
       use: { ...devices["Desktop Firefox"] },
     },
 
     {
-      name: "webkit",
+      name: `webkit`,
       use: { ...devices["Desktop Safari"] },
     },
 
