@@ -1,0 +1,37 @@
+{
+  "name": "o2_playwright_demo",
+  "version": "1.0.0",
+  "description": "TOTO vidíte online",
+  "main": "index.js",
+  "dependencies": {
+    "cross-env": "^10.1.0",
+    "cross-spawn": "^7.0.6",
+    "dotenv": "^17.2.3",
+    "fsevents": "^2.3.2",
+    "isexe": "^2.0.0",
+    "path-key": "^3.1.1",
+    "playwright": "^1.56.1",
+    "playwright-core": "^1.56.1",
+    "shebang-command": "^2.0.0",
+    "shebang-regex": "^3.0.0",
+    "typescript": "^5.9.3",
+    "undici-types": "^7.16.0",
+    "which": "^2.0.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.9.2"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tredgate/o2_playwright_demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tredgate/o2_playwright_demo/issues"
+  },
+  "homepage": "https://github.com/tredgate/o2_playwright_demo#readme"
+}
