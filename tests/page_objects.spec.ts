@@ -7,7 +7,7 @@ test("PageObjects Exercise - Login and Logout", async ({ page }) => {
   const dashboardPage = new DashboardPage(page);
 
   await loginPage.openPmtool();
-  await loginPage.login("pw_skoleni", "TEG2023");
+  await loginPage.login("o2_user", "o2_user123");
   await dashboardPage.waitUntilLoaded();
   await dashboardPage.clickProfile();
   await dashboardPage.clickLogout();

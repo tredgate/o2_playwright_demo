@@ -30,8 +30,8 @@ export function createProdTestData(language: TestLanguage): TestData {
     users: {
       pmtool: {
         admin: {
-          username: "pw_skoleni",
-          password: "TEG2023",
+          username: "o2_user",
+          password: "o2_user123",
           description: "Main administrator account for production testing",
         },
 
