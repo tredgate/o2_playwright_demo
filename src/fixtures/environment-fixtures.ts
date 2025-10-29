@@ -12,7 +12,7 @@
  *
  * Usage in tests:
  * ```typescript
- * test('login test', async ({ page, testData, envConfig }) => {
+ * test('login test', async ({ page, testData }) => {
  *   await page.goto(testData.urls.loginUrl);
  *   // testData and envConfig are automatically injected
  * });
