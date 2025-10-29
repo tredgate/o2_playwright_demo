@@ -99,6 +99,12 @@ export function getTestData(
   }
 }
 
+export function getCurrentTestData(): TestData {
+  const environment = getCurrentEnvironment();
+  const language = getCurrentLanguage();
+  return getTestData(environment, language);
+}
+
 /**
  * Creates environment-specific Playwright configuration
  * @param environment - The target environment
